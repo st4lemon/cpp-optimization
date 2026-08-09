@@ -2,7 +2,7 @@
 
 namespace vsearch {
 
-std::size_t argmin(
+std::pair<float, std::size_t> argmin(
     const float* a,
     std::size_t n
 ) {
@@ -11,7 +11,7 @@ std::size_t argmin(
     for(std::size_t i = 1; i<n; i++) {
         if(a[i] < a[res]) res = i;
     }
-    return res;
+    return {a[res], res};
 
 }
 

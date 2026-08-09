@@ -11,16 +11,17 @@ void test_argmin(std::size_t n) {
 
     float a[n];
     int32_t val = 9;
-    std::size_t expected = 0;
+    std::pair<float, std::size_t> expected{mod+1, 0};
     for(std::size_t i = 0; i<n; i++) {
         a[i] = val;
-        if(a[expected] > a[i]) expected = i;
+        if(expected.first > a[i]) expected = {a[i], i};
         val = 2*val % mod;
     }
 
-    std::size_t actual = vsearch::argmin(a, n);
+    std::pair<float, std::size_t> actual = vsearch::argmin(a, n);
 
-    ASSERT_INT32_EQ("test_argmin, n = " + std::to_string(n), expected, actual)
+    ASSERT_FP32_EQ("test_argmin, n = " + std::to_string(n), expected.first, actual.first);
+    ASSERT_INT32_EQ("test_argmin, n = " + std::to_string(n), expected.second, actual.second);
 
 }
 

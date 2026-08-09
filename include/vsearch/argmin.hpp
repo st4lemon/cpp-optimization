@@ -1,10 +1,11 @@
 #pragma once
 
 #include <cstddef>
+#include <utility>
 
 namespace vsearch {
 
-std::size_t argmin(
+std::pair<float, std::size_t> argmin(
     const float* a,
     std::size_t n
 );
