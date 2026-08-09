@@ -1,11 +1,16 @@
 find_package(benchmark REQUIRED)
 
-add_executable(bench_distance
-    bench_distance.cpp
-)
+function(add_benchmark NAME)
+    add_executable(${NAME}
+        ${NAME}.cpp
+    )
 
-target_link_libraries(bench_distance
-    PRIVATE
-        vsearch
-        benchmark::benchmark
-)
+    target_link_libraries(${NAME}
+        PRIVATE
+            vsearch
+            benchmark::benchmark
+    )
+endfunction()
+
+add_benchmark(bench_argmin)
+add_benchmark(bench_distance)
