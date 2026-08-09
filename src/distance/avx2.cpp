@@ -24,11 +24,11 @@ float l2_squared(
 
     float ret = 0.0f;
 
-    for(; i<dimension; i++) {
+    for(; i<dimension; ++i) {
         ret += (a[i] - b[i]) * (a[i] - b[i]);
     }
 
-    for(i = 0; i<8; i++) {
+    for(i = 0; i<8; ++i) {
         ret += values[i];
     }
 

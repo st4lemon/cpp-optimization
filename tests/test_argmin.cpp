@@ -10,7 +10,7 @@
 void test_argmin(std::size_t n) {
 
     float a[n];
-    int32_t val = 9;
+    int32_t val = 93415;
     std::pair<float, std::size_t> expected{mod+1, 0};
     for(std::size_t i = 0; i<n; i++) {
         a[i] = val;
@@ -20,8 +20,8 @@ void test_argmin(std::size_t n) {
 
     std::pair<float, std::size_t> actual = vsearch::argmin(a, n);
 
-    ASSERT_FP32_EQ("test_argmin, n = " + std::to_string(n), expected.first, actual.first);
-    ASSERT_INT32_EQ("test_argmin, n = " + std::to_string(n), expected.second, actual.second);
+    ASSERT_FP32_EQ("test_argmin val, n = " + std::to_string(n), expected.first, actual.first);
+    ASSERT_INT32_EQ("test_argmin ind, n = " + std::to_string(n), expected.second, actual.second);
 
 }
 
@@ -35,6 +35,7 @@ int main() {
     test_argmin(64);
     test_argmin(65);
     test_argmin(66);
+    test_argmin(16384);
 
     std::cout << "All tests passed!" << std::endl;
 
