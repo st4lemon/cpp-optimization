@@ -99,6 +99,7 @@ cmake -S . -B build/<backend-name> \
 ```
 5. Build and run tests/benchmarks for the new backend.
 
+
 ## Notes
 
 - This repository is primarily educational: the focus is on understanding and comparing kernel implementations.
@@ -117,3 +118,44 @@ cmake -S . -B build/<backend-name> \
 |Memory|2x16GB G.Skill DDR5-6000|
 |Memory Channels|2|
 |GPU|RTX 3060 12GB|
+
+# Roadmap
+
+```
+                     0. Build system
+                              │
+                              ▼
+                  1. SIMD distance kernels
+                              │
+                              ▼
+                       2. Top-k kernels
+                              │
+                              ▼
+                       3. Flat search
+                              │
+                              ▼
+                     4. Memory layouts
+                              │
+                              ▼
+                      5. Product Quantization
+                              │
+                              ▼
+                    6. SIMD PQ / ADC
+                              │
+                              ▼
+                         7. IVF-PQ
+                              │
+                    ┌─────────┴─────────┐
+                    ▼                   ▼
+             8. RP trees            9. HNSW
+                    │                   │
+                    └─────────┬─────────┘
+                              ▼
+                   10. Runtime dispatch
+                              │
+                              ▼
+                  11. Compiler vs intrinsics
+                              │
+                              ▼
+                  12. Deep performance profiling
+```
