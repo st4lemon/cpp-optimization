@@ -16,6 +16,7 @@ set(VSEARCH_BACKEND "scalar" CACHE STRING "Vector distance backend")
 set_property(CACHE VSEARCH_BACKEND PROPERTY STRINGS
     scalar
     avx2
+    avx2-opt
 )
 
 add_subdirectory(src)
