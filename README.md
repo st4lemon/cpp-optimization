@@ -106,7 +106,7 @@ cmake -S . -B build/<backend-name> \
 
 
 ### Machine Specs
-
+|Item|Description|
 |-|-|
 |CPU|AMD Ryzen 7 7800X3D| 
 |Cores/Threads|8/16|
