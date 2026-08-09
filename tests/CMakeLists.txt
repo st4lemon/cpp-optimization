@@ -19,3 +19,4 @@ endfunction()
 
 add_vsearch_test(test_distance)
 add_vsearch_test(test_argmin)
+add_vsearch_test(test_topk)

@@ -14,3 +14,4 @@ endfunction()
 
 add_benchmark(bench_argmin)
 add_benchmark(bench_distance)
+add_benchmark(bench_topk)

@@ -7,6 +7,7 @@ set(VSEARCH_BACKENDS
 set(VSEARCH_BACKEND_SOURCES_scalar
     distance/scalar.cpp
     argmin/scalar.cpp
+    topk/scalar.cpp
 )
 
 set(VSEARCH_BACKEND_SOURCES_avx2

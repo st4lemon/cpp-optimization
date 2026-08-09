@@ -10,6 +10,12 @@ static void BM_ARGMIN(benchmark::State& state) {
 
     std::vector<float> a(dimension);
 
+    std::mt19937 rng(12345);
+    std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+
+    for (float& x : a)
+        x = dist(rng);
+
     for (auto _ : state) {
         std::pair<float, std::size_t> result = vsearch::argmin(
             a.data(),
