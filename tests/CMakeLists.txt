@@ -1,19 +1,21 @@
-add_executable(test_distance
-    test_distance.cpp
-    test_utils.cpp
-)
+function(add_vsearch_test NAME)
+    add_executable(${NAME}
+        ${NAME}.cpp
+        test_utils.cpp
+    )
 
-target_link_libraries(test_distance
-    PRIVATE
-        vsearch
-)
+    target_link_libraries(${NAME}
+        PRIVATE
+            vsearch
+    )
 
-target_include_directories(test_distance
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}
-)
+    target_include_directories(${NAME}
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}
+    )
 
-add_test(
-    NAME distance
-    COMMAND test_distance
-)
+    add_test(NAME ${NAME} COMMAND ${NAME})
+endfunction()
+
+add_vsearch_test(test_distance)
+add_vsearch_test(test_argmin)

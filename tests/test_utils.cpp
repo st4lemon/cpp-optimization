@@ -5,6 +5,16 @@
 #include <iostream>
 #include <string>
 
+#define TEST_FAIL(n, e, a, d) \
+    do { \
+        std::cerr \
+            << "FAILED: " << n << '\n' \
+            << "  expected: " << e << '\n' \
+            << "  actual:   " << a << '\n' \
+            << "  diff:     " << d << '\n'; \
+        std::abort(); \
+    } while(false); 
+
 namespace test {
 
 void assert_fp32_eq(
@@ -16,12 +26,18 @@ void assert_fp32_eq(
     float diff = std::abs(expected - actual);
 
     if (diff > tolerance) {
-        std::cerr
-            << "FAILED: " << name << '\n'
-            << "  expected: " << expected << '\n'
-            << "  actual:   " << actual << '\n'
-            << "  diff:     " << diff << '\n';
-        std::abort();
+        TEST_FAIL(name, expected, actual, diff)
+    }
+}
+
+void assert_int32_eq(
+    const std::string name,
+    int32_t expected,
+    int32_t actual
+) {
+
+    if (expected != actual) {
+        TEST_FAIL(name, expected, actual, expected-actual);
     }
 }
 

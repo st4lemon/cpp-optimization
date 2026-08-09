@@ -25,7 +25,7 @@ This project currently supports a number of backends:
 
 Create a Release build for the scalar backend:
 
-    cmake -S . -B build-scalar \
+    cmake -S . -B build/scalar \
         -DCMAKE_BUILD_TYPE=Release \
         -DVSEARCH_BACKEND=scalar
 
@@ -61,44 +61,26 @@ Run a specific benchmark pattern:
 
 ## Adding a new kernel
 
-1. Define the kernel in a header file under `include/`.
-2. Add a folder under `src/` for backend implementations.
-3. Create unit tests in `tests/` and add the executable to `tests/CMakeLists.txt`.
-4. Create benchmarking scripts in `benchmarks/` and add the executable to `benchmarks/CMakeLists.txt`.
+1. Define the kernel interface in a header under `include/`.
+2. Add a backend-specific implementation file in `src/<kernel>/<backend>.cpp`.
+3. If this kernel is new for an existing backend, update `src/CMakeLists.txt` by adding the file to the appropriate `VSEARCH_BACKEND_SOURCES_<backend>` list.
+4. Create or extend unit tests in `tests/` and keep `tests/CMakeLists.txt` backend-agnostic.
+5. Add benchmark cases in `benchmarks/bench_distance.cpp`; `benchmarks/CMakeLists.txt` remains unchanged.
 
 ## Adding a new backend
 
-1. For each kernel, implement the new backend under `src/<kernel>/`.
-2. Update `src/CMakeLists.txt` to add a new library for the backend: 
-```
-add_library(vsearch_backend_<backend-name> STATIC
-    <kernel-1>/<backend-name>.cpp
-    ...
-    <kernel-n>/<backend-name>.cpp
-)
+1. Implement the new backend for each kernel with files such as `src/<kernel>/<backend>.cpp`.
+2. In `src/CMakeLists.txt`, add the backend name to `VSEARCH_BACKENDS`.
+3. Define `VSEARCH_BACKEND_SOURCES_<backend>` listing all backend source files.
+4. Optionally define `VSEARCH_BACKEND_COMPILE_OPTIONS_<backend>` if the backend needs special compiler flags.
+5. Update the root `CMakeLists.txt` backend option list if you want the backend to appear in the cache string suggestions.
+6. Configure and build the new backend:
 
-target_include_directories(vsearch_backend_<backend-name>
-    PUBLIC
-        ${PROJECT_SOURCE_DIR}/include
-)
+    cmake -S . -B build/<backend-name> \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DVSEARCH_BACKEND=<backend-name>
 
-target_compile_options(vsearch_backend_<backend-name>
-    PRIVATE
-        -Wall
-        -Wextra
-        -Wpedantic
-        <backend-specific flags>
-)
-```
-3. For each kernel, add an implementation using the new backend as `src/<kernel>/<backend-name>.cpp`
-4. Configure a new build directory for the backend, for example:
-```a
-cmake -S . -B build/<backend-name> \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DVSEARCH_BACKEND=<backend-name>
-```
-5. Build and run tests/benchmarks for the new backend.
-
+7. Run tests and benchmarks for the new backend.
 
 ## Notes
 
