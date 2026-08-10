@@ -20,3 +20,10 @@ endfunction()
 add_vsearch_test(test_distance)
 add_vsearch_test(test_argmin)
 add_vsearch_test(test_topk)
+
+add_custom_target(tests
+    DEPENDS
+        test_distance
+        test_argmin
+        test_topk
+)

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <utility>
+#include <random>
 
 static void BM_ARGMIN(benchmark::State& state) {
     const std::size_t dimension = state.range(0);

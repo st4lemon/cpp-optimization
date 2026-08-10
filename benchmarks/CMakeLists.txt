@@ -15,3 +15,10 @@ endfunction()
 add_benchmark(bench_argmin)
 add_benchmark(bench_distance)
 add_benchmark(bench_topk)
+
+add_custom_target(benchmarks
+    DEPENDS
+        bench_distance
+        bench_argmin
+        bench_topk
+)

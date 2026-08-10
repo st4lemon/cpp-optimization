@@ -3,6 +3,7 @@
 #include <vsearch/distance.hpp>
 
 #include <vector>
+#include <random>
 
 static void BM_L2(benchmark::State& state) {
     const std::size_t dimension = state.range(0);
