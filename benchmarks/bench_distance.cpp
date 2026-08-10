@@ -21,8 +21,8 @@ static void BM_L2(benchmark::State& state) {
 
     for (auto _ : state) {
         float result = vsearch::l2_squared(
-            a.data(),
-            b.data(),
+            a,
+            b,
             dimension
         );
 

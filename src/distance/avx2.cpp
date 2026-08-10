@@ -5,16 +5,16 @@
 namespace vsearch {
 
 float l2_squared(
-    const float* a,
-    const float* b,
+    const std::vector<float> &a,
+    const std::vector<float> &b,
     std::size_t dimension
 ) {
 
     __m256 res = _mm256_setzero_ps();
     std::size_t i = 0;
     for(; i + 8 <= dimension; i += 8) {
-        __m256 x = _mm256_loadu_ps(a + i);
-        __m256 y = _mm256_loadu_ps(b + i);
+        __m256 x = _mm256_loadu_ps(a.data() + i);
+        __m256 y = _mm256_loadu_ps(b.data() + i);
         x = _mm256_sub_ps(x, y);
         res = _mm256_fmadd_ps(x, x, res);
     }

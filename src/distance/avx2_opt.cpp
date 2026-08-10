@@ -5,8 +5,8 @@
 namespace vsearch {
 
 float l2_squared(
-    const float* a,
-    const float* b,
+    const std::vector<float> &a,
+    const std::vector<float> &b,
     std::size_t dimension
 ) {
 
@@ -16,17 +16,17 @@ float l2_squared(
     __m256 res3 = _mm256_setzero_ps();
     std::size_t i = 0;
     for(; i + 32 <= dimension; i += 32) {
-        __m256 x0 = _mm256_loadu_ps(a + i);
-        __m256 y0 = _mm256_loadu_ps(b + i);
+        __m256 x0 = _mm256_loadu_ps(a.data() + i);
+        __m256 y0 = _mm256_loadu_ps(b.data() + i);
         
-        __m256 x1 = _mm256_loadu_ps(a + i + 8);
-        __m256 y1 = _mm256_loadu_ps(b + i + 8);
+        __m256 x1 = _mm256_loadu_ps(a.data() + i + 8);
+        __m256 y1 = _mm256_loadu_ps(b.data() + i + 8);
 
-        __m256 x2 = _mm256_loadu_ps(a + i + 16);
-        __m256 y2 = _mm256_loadu_ps(b + i + 16);
+        __m256 x2 = _mm256_loadu_ps(a.data() + i + 16);
+        __m256 y2 = _mm256_loadu_ps(b.data() + i + 16);
         
-        __m256 x3 = _mm256_loadu_ps(a + i + 24);
-        __m256 y3 = _mm256_loadu_ps(b + i + 24);
+        __m256 x3 = _mm256_loadu_ps(a.data() + i + 24);
+        __m256 y3 = _mm256_loadu_ps(b.data() + i + 24);
 
         x0 = _mm256_sub_ps(x0, y0);
         x1 = _mm256_sub_ps(x1, y1);

@@ -23,8 +23,7 @@ static void BM_TOPK(benchmark::State& state) {
         std::vector<std::pair<float, std::size_t>> result = vsearch::topk(
             a,
             dimension,
-            k, 
-            rng
+            k
         );
 
         benchmark::DoNotOptimize(result);

@@ -9,7 +9,7 @@
 
 void test_simple(std::size_t n) {
 
-    float a[n], b[n];
+    std::vector<float> a(n), b(n);
     for(std::size_t i = 0; i<n; i++) {
         a[i] = 1.0f;
         b[i] = 1.0f + i + 1;

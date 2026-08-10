@@ -18,8 +18,7 @@ void test_topk(std::size_t n, std::size_t k) {
         val = 2*val % mod;
     }
 
-    std::mt19937 rd(std::random_device{}());
-    std::vector<std::pair<float, std::size_t>> actual = vsearch::topk(a, n, k, rd);
+    std::vector<std::pair<float, std::size_t>> actual = vsearch::topk(a, n, k);
     std::sort(actual.begin(), actual.end());
 
     std::sort(a.begin(), a.end());

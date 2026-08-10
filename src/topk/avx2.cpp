@@ -7,8 +7,7 @@
 namespace vsearch {
 
     
-template <typename RNG>
-void quickselect(std::vector<std::pair<float, std::size_t>> &a, std::size_t l, std::size_t r, std::size_t k, RNG &rng) {
+void quickselect(std::vector<std::pair<float, std::size_t>> &a, std::size_t l, std::size_t r, std::size_t k, std::mt19937 &rng) {
     // choose random pivot
     while(l < r) {
         std::pair<float, std::size_t> p = a[rng() % (r-l+1) + l];
@@ -31,13 +30,13 @@ void quickselect(std::vector<std::pair<float, std::size_t>> &a, std::size_t l, s
 
 }
 
-template <typename RNG>
 std::vector<std::pair<float, std::size_t>> topk(
     std::vector<std::pair<float, std::size_t>> &a,
     std::size_t n, 
-    std::size_t k, 
-    RNG& rng
+    std::size_t k
 ) {
+
+    static thread_local std::mt19937 rng;
 
     // run quickselect on b
     if(k < n) quickselect(a, 0, n-1, k, rng);
@@ -46,12 +45,5 @@ std::vector<std::pair<float, std::size_t>> topk(
 
     return {a.begin(), a.begin()+std::min(k, n)};
 }
-
-template std::vector<std::pair<float, std::size_t>> topk<std::mt19937>(
-    std::vector<std::pair<float, std::size_t>> &a,
-    std::size_t n, 
-    std::size_t k, 
-    std::mt19937& rng
-);
 
 } // vsearch

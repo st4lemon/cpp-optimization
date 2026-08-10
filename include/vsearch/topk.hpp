@@ -9,12 +9,10 @@ namespace vsearch {
 // returns a vector containing the smallest k values, 
 // formatted as {value, index} unsorted
 
-template <typename RNG>
 std::vector<std::pair<float, std::size_t>> topk(
     std::vector<std::pair<float, std::size_t>> &a,
     std::size_t n, 
-    std::size_t k, 
-    RNG& rng
+    std::size_t k
 );
 
 } // vsearch 

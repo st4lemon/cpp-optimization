@@ -3,8 +3,8 @@
 namespace vsearch {
 
 float l2_squared(
-    const float* a,
-    const float* b,
+    const std::vector<float> &a,
+    const std::vector<float> &b,
     std::size_t dimension
 ) {
     // Implementation for scalar L2 squared distance calculation
