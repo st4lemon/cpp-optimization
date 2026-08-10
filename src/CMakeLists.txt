@@ -13,7 +13,6 @@ set(VSEARCH_BACKEND_SOURCES_scalar
 set(VSEARCH_BACKEND_SOURCES_avx2
     distance/avx2.cpp
     argmin/avx2.cpp
-    topk/scalar.cpp
 )
 
 set(VSEARCH_BACKEND_SOURCES_avx2_opt
@@ -44,6 +43,7 @@ function(vsearch_add_backend backend)
             -Wall
             -Wextra
             -Wpedantic
+        PUBLIC
             ${VSEARCH_BACKEND_COMPILE_OPTIONS_${backend_id}}
     )
 endfunction()
